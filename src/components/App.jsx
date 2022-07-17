@@ -92,15 +92,16 @@ export default class App extends Component{
       <>
         <Searchbar onSubmit={this.handelFormSubmit} />
         <ToastContainer autoClose={3000} theme={'colored'} />
-        <ImageGallery images={images} toggleModal={this.toggleModal} />
+        {images.length !== 0 && 
+        <ImageGallery images={images} toggleModal={this.toggleModal} />}
 
         {status === 'pending' && <Loader/>}
 
         {status === 'rejeted' && 
-        <>
+        (<>
           <Error message={error.message} />
           <ToastContainer autoClose={3000} theme={'colored'} />
-        </>
+        </>)
         }
         {status === 'resolved' && 
         <div>
