@@ -91,10 +91,10 @@ export default class App extends Component{
       return (
         <>
           <Searchbar onSubmit={this.handelFormSubmit} />
-          <ToastContainer autoClose={4000} theme={'colored'} />
+          <ToastContainer autoClose={3000} theme={'colored'} />
         </>);
     }
-      if( status=== "loader"){
+      if( status=== "pending"){
         
          return <Loader/>
        
@@ -103,7 +103,7 @@ export default class App extends Component{
         return (
           <>
             <Error message={error.message} />
-            <ToastContainer autoClose={4000} theme={'colored'} />
+            <ToastContainer autoClose={3000} theme={'colored'} />
           </>)
       }
       if (status === 'resolved') {
