@@ -20,7 +20,9 @@ function ImageGallery({ toggleModal, images }) {
 }
 
 ImageGallery.propTypes = {
+  id: PropTypes.number,
   images: PropTypes.array,
-  toggleModal: PropTypes.func,
+  toggleModal: PropTypes.func.isRequired,
 };
+
 export default ImageGallery;

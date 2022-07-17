@@ -47,6 +47,7 @@ export default class App extends Component{
     // Загружаем еще 
     if (prevPage !== nextPage && nextPage !== 1) {
       this.fetchGallery(nextImages, nextPage);
+      this.setState({status: "pending"});
     }
   }
   
@@ -86,36 +87,29 @@ export default class App extends Component{
 
   render(){
     const { images, bigImage, status, error } = this.state;
-   
-    if (status === 'idle') {
-      return (
+
+  return(
+      <>
+        <Searchbar onSubmit={this.handelFormSubmit} />
+        <ToastContainer autoClose={3000} theme={'colored'} />
+        <ImageGallery images={images} toggleModal={this.toggleModal} />
+
+        {status === 'pending' && <Loader/>}
+
+        {status === 'rejeted' && 
         <>
-          <Searchbar onSubmit={this.handelFormSubmit} />
+          <Error message={error.message} />
           <ToastContainer autoClose={3000} theme={'colored'} />
-        </>);
-    }
-      if( status=== "pending"){
-        
-         return <Loader/>
-       
-      }
-      if (status === 'rejected') {
-        return (
-          <>
-            <Error message={error.message} />
-            <ToastContainer autoClose={3000} theme={'colored'} />
-          </>)
-      }
-      if (status === 'resolved') {
-        return (
-          <div>
-            <Searchbar onSubmit={this.handelFormSubmit} />
-            <ImageGallery images={images} toggleModal={this.toggleModal} />
-            {this.state.showModal && (<Modal image={bigImage} onClickModal={this.toggleModal} />)}
-            {this.state.images.length !==this.state.totalHits && (<Button onClick={this.onLoadMore} />)}
-            <ToastContainer autoClose={4000} theme={'colored'} />
-          </div>
-        );
-      }
-    }
-}
+        </>
+        }
+        {status === 'resolved' && 
+        <div>
+             {this.state.showModal && (<Modal image={bigImage} onClickModal={this.toggleModal} />)}
+             {this.state.images.length !==this.state.totalHits && (<Button onClick={this.onLoadMore} />)}
+             <ToastContainer autoClose={4000} theme={'colored'} />
+        </div>
+        }
+      </>
+     );
+  }
+};

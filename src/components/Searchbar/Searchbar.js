@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import iconSearch from '../../search.svg'
+import PropTypes from 'prop-types';
 
 class SearchBar extends Component{
 state={
@@ -51,5 +52,9 @@ handleSubmit = e =>{
 
  }
 }
+
+SearchBar.propType = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default SearchBar;
