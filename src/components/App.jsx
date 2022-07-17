@@ -103,12 +103,12 @@ export default class App extends Component{
           <ToastContainer autoClose={3000} theme={'colored'} />
         </>)
         }
-        {status === 'resolved' && 
+        {status === 'resolved' && (
         <div>
              {this.state.showModal && (<Modal image={bigImage} onClickModal={this.toggleModal} />)}
              {this.state.images.length !==this.state.totalHits && (<Button onClick={this.onLoadMore} />)}
              <ToastContainer autoClose={4000} theme={'colored'} />
-        </div>
+        </div>)
         }
       </>
      );
